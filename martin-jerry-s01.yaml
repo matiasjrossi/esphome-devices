@@ -1,7 +1,12 @@
-esphome:
+substitutions:
   name: mj-s01
   friendly_name: Martin Jerry S01 Smart Switch
-  name_add_mac_suffix: true
+  name_add_mac_suffix: "true"
+
+esphome:
+  name: ${name}
+  friendly_name: ${friendly_name}
+  name_add_mac_suffix: ${name_add_mac_suffix}
   project:
     name: matiasjrossi.martin-jerry-s01
     version: "1.0"

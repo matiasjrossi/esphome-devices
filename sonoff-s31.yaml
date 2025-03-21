@@ -2,7 +2,6 @@ substitutions:
   name: sonoff-s31
   friendly_name: Sonoff S31 Smart Plug
   name_add_mac_suffix: "true"
-  version: "1.0"
 
 esphome:
   name: ${name}
@@ -10,10 +9,10 @@ esphome:
   name_add_mac_suffix: ${name_add_mac_suffix}
   project:
     name: matiasjrossi.sonoff-s31
-    version: ${version}
+    version: "1.0"
 
 dashboard_import:
-  package_import_url: github://matiasjrossi/esphome-devices/sonoff-s31.yaml@${version}
+  package_import_url: github://matiasjrossi/esphome-devices/sonoff-s31.yaml
 
 <<: !include common.yaml
 
