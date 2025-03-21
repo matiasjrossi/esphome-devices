@@ -1,0 +1,70 @@
+esphome:
+  name_add_mac_suffix: true
+
+esphome:
+  name: sonoff-s31
+  friendly_name: Sonoff S31 Smart Plug
+  name_add_mac_suffix: true
+  project:
+    name: matiasjrossi.sonoff-s31
+    version: "1.0"
+
+dashboard_import:
+  package_import_url: github://matiasjrossi/esphome-config/devices/sonoff-s31.yaml
+
+<<: !include common.yaml
+
+esp8266:
+  board: esp01_1m
+  restore_from_flash: true
+
+logger:
+  baud_rate: 0
+
+uart:
+  rx_pin: RX
+  baud_rate: 4800
+  parity: EVEN
+
+binary_sensor:
+  - platform: gpio
+    pin:
+      number: GPIO0
+      mode: INPUT_PULLUP
+      inverted: true
+    name: Button
+    on_press:
+      - switch.toggle: relay
+  - platform: status
+    name: Status
+
+sensor:
+  - platform: cse7766
+    current:
+      name: Current
+      accuracy_decimals: 1
+    voltage:
+      name: Voltage
+      accuracy_decimals: 1
+    energy:
+      name: Energy
+      accuracy_decimals: 1
+    power:
+      name: Power
+      accuracy_decimals: 1
+      id: my_power
+  - platform: wifi_signal
+    name: WiFi Signal
+
+switch:
+  - platform: gpio
+    name: None
+    pin: GPIO12
+    id: relay
+    restore_mode: RESTORE_DEFAULT_OFF
+    device_class: OUTLET
+
+status_led:
+  pin:
+    number: GPIO13
+    inverted: true

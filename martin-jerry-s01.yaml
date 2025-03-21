@@ -1,0 +1,54 @@
+esphome:
+  name: mj-s01
+  friendly_name: Martin Jerry S01 Smart Switch
+  name_add_mac_suffix: true
+  project:
+    name: matiasjrossi.mj-s01
+    version: "1.0"
+
+dashboard_import:
+  package_import_url: github://matiasjrossi/esphome-config/devices/martin-jerry-s01.yaml
+
+<<: !include common.yaml
+
+esp8266:
+  board: esp01_1m
+  restore_from_flash: true
+
+logger:
+
+binary_sensor:
+  - platform: gpio
+    pin:
+      number: GPIO13
+      mode: INPUT_PULLUP
+      inverted: true
+    name: Button
+    on_press:
+      - switch.toggle: relay
+  - platform: status
+    name: Status
+
+sensor:
+  - platform: wifi_signal
+    name: WiFi Signal
+
+switch:
+  - platform: gpio
+    name: None
+    id: relay
+    pin: GPIO12
+    restore_mode: RESTORE_DEFAULT_OFF
+    on_turn_on:
+      - switch.turn_on: led
+    on_turn_off:
+      - switch.turn_off: led
+  - platform: gpio
+    pin: GPIO05
+    id: led
+    inverted: true
+
+status_led:
+  pin:
+    number: GPIO04
+    inverted: true

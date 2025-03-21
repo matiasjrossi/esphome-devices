@@ -1,0 +1,86 @@
+esphome:
+  name: mj-sd01
+  friendly_name: Martin Jerry SD01 Smart Dimmer
+  name_add_mac_suffix: true
+  project:
+    name: matiasjrossi.mj-sd01
+    version: "1.0"
+
+dashboard_import:
+  package_import_url: github://matiasjrossi/esphome-config/devices/martin-jerry-sd01.yaml
+
+<<: !include common.yaml
+
+esp8266:
+  board: esp01_1m
+  restore_from_flash: true
+
+logger:
+
+binary_sensor:
+  - platform: gpio
+    pin:
+      number: GPIO15
+      mode: INPUT_PULLUP
+    name: Button
+    on_press:
+      - switch.toggle: pwm_switch
+  - platform: status
+    name: Status
+
+sensor:
+  - platform: wifi_signal
+    name: WiFi Signal
+
+switch:
+  - platform: output
+    name: None
+    id: pwm_switch
+    output: pwm
+    restore_mode: RESTORE_DEFAULT_OFF
+    on_turn_on:
+      - switch.turn_on: led5
+      - switch.turn_on: led4
+      - switch.turn_on: led3
+      - switch.turn_on: led2
+    on_turn_off:
+      - switch.turn_off: led5
+      - switch.turn_off: led4
+      - switch.turn_off: led3
+      - switch.turn_off: led2
+  - platform: gpio
+    pin: GPIO03
+    id: led5
+    inverted: true
+  - platform: gpio
+    pin: GPIO05
+    id: led4
+    inverted: true
+  - platform: gpio
+    pin: GPIO12
+    id: led3
+    inverted: true
+  - platform: gpio
+    pin: GPIO14
+    id: led2
+    inverted: true
+
+output:
+  - platform: gpio
+    id: pwm
+    pin: GPIO13
+    power_supply: relay
+
+power_supply:
+  - id: relay
+    pin:
+      number: GPIO16
+      inverted: True
+    enable_time: 0s
+    keep_on_time: 0s
+
+status_led:
+  pin:
+    number: GPIO04
+    inverted: true
+

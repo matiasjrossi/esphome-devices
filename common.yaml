@@ -1,0 +1,22 @@
+api:
+
+ota:
+  - platform: esphome
+
+wifi:
+  ap:
+  use_address: ${address}
+
+captive_portal:
+
+button:
+  - platform: restart
+    name: Restart
+    entity_category: diagnostic
+  - platform: factory_reset
+    name: Restart With Factory Settings
+    entity_category: diagnostic
+
+time:
+  - platform: sntp
+    id: my_time
