@@ -3,11 +3,11 @@ esphome:
   friendly_name: Martin Jerry SD01 Smart Dimmer
   name_add_mac_suffix: true
   project:
-    name: matiasjrossi.mj-sd01
+    name: matiasjrossi.martin-jerry-sd01
     version: "1.0"
 
 dashboard_import:
-  package_import_url: github://matiasjrossi/esphome-config/devices/martin-jerry-sd01.yaml
+  package_import_url: github://matiasjrossi/esphome-devices/martin-jerry-sd01.yaml
 
 <<: !include common.yaml
 

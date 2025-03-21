@@ -3,11 +3,11 @@ esphome:
   friendly_name: Martin Jerry S01 Smart Switch
   name_add_mac_suffix: true
   project:
-    name: matiasjrossi.mj-s01
+    name: matiasjrossi.martin-jerry-s01
     version: "1.0"
 
 dashboard_import:
-  package_import_url: github://matiasjrossi/esphome-config/devices/martin-jerry-s01.yaml
+  package_import_url: github://matiasjrossi/esphome-devices/martin-jerry-s01.yaml
 
 <<: !include common.yaml
 

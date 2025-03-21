@@ -10,7 +10,7 @@ esphome:
     version: "1.0"
 
 dashboard_import:
-  package_import_url: github://matiasjrossi/esphome-config/devices/sonoff-s31.yaml
+  package_import_url: github://matiasjrossi/esphome-devices/sonoff-s31.yaml
 
 <<: !include common.yaml
 
